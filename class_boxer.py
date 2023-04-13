@@ -22,6 +22,16 @@ class Boxer:
         self.is_knocked = False
         self.ko_punch = False
 
+        self.punchesthrown = 0
+        self.kopunchesthrown = 0
+        self.cleanpunches = 0
+        self.cleankopunches= 0
+        self.punchesavoided = 0
+        self.punchescountered = 0
+        self.punchesblocked = 0
+        self.punchestaken = 0
+        self.numbercombos = 0
+
 
     def nozeronomax(self):
         #self.stamina = self.stamina
@@ -32,6 +42,7 @@ class Boxer:
         damage = (self.strengh //2 + self.speed //3) + random.randint(1,5)
 
         self.stamina -= random.randint(3,6)
+        self.punchesthrown +=1
         return damage
 
     def kopunch(self):
@@ -39,6 +50,7 @@ class Boxer:
         damage = (self.strengh//2  + self.speed // 2) + random.randint(3,6)
 
         self.stamina -= random.randint(5,10)
+        self.kopunchesthrown +=1
         return damage
 
 
@@ -53,31 +65,36 @@ class Boxer:
             print (f"{self.name} Blocks the strike!\n")
             self.vitality-= other.punch() // 4
             self.stamina -= random.randint(1, 3)
-        #print(f"{self.name}, has: {self.vitality}, vitality left\n")
+        self.punchesblocked +=1
 
     def avoid(self, other):
         other.ko_punch=False
         print(f"Punch thrown by: {other.name}\n")
         print (f"{self.name} avoided damage!\n")
         self.stamina -= random.randint(1,2)
+        self.punchesavoided += 1
 
     def counter(self, other):
 
-        #self.punch()
+
         print(f"{self.name} counter attacks!\n")
+        self.punchescountered += 1
         self.exchange(other)
-        #other.takepunch(self)
+
 
     def takepunch(self, other):
+        self.punchestaken += 1
         if other.ko_punch == True:
             self.vitality-= other.kopunch() - (self.toughness // 5)
             self.stamina -= random.randint(4,8)
+            other.cleankopunches +=1
             self.knocked(other)
 
 
         else:
             self.vitality-= other.punch() - (self.toughness // 4)
             self.stamina -= random.randint(3,5)
+            other.cleanpunches +=1
             print(f"punch thrown by: {other.name}\n")
             print("punch taken by:", self.name,"\n")
 
@@ -138,10 +155,12 @@ class Boxer:
                 if other.vitality >0 and self.stamina >=30:
                     print("3!\n")
                     self.exchange(other)
+                    print(f"Combination from {self.name}!\n")
+                    self.numbercombos +=1
                     if other.is_knocked == True:
                         return
-                    #other.comboed = True
-                    print(f"Combination from {self.name}!\n")
+
+
 
 
     def moveto(self, other):
@@ -188,12 +207,20 @@ class Boxer:
 
                     r = random.randint(1,3)
                     if r == 1:
-                        other.avoid(self)
-                        #return "avoid"
-                        if other.speed > 10 and other.stamina > 25:
-                            if random.random() < 0.5:
-                                other.counter(self)
-                                return "counter"
+                        if other.stamina > 10:
+                            other.avoid(self)
+                            #return "avoid"
+                            if other.speed > 10 and other.stamina > 25:
+                                if random.random() < 0.5:
+                                    other.counter(self)
+                                    return "counter"
+                        else:
+                            if random.choice([True, False]):
+                                other.block(self)
+                                return "block"
+                            else:
+                                other.takepunch(self)
+                                return ("takepunch")
                     if r == 2:
                         other.block(self)
                         return "block"
@@ -207,4 +234,3 @@ class Boxer:
         else:
             self.breath()
             return ("breath")
-
