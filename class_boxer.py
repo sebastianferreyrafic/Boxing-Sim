@@ -32,7 +32,6 @@ class Boxer:
         self.punchestaken = 0
         self.numbercombos = 0
 
-
     def nozeronomax(self):
         #self.stamina = self.stamina
         self.stamina, self.vitality = max(0, self.stamina), max(0, self.vitality)
@@ -52,7 +51,6 @@ class Boxer:
         self.stamina -= random.randint(5,10)
         self.kopunchesthrown +=1
         return damage
-
 
     def block (self, other):
         if other.ko_punch:
@@ -75,12 +73,9 @@ class Boxer:
         self.punchesavoided += 1
 
     def counter(self, other):
-
-
         print(f"{self.name} counter attacks!\n")
         self.punchescountered += 1
         self.exchange(other)
-
 
     def takepunch(self, other):
         self.punchestaken += 1
@@ -89,7 +84,6 @@ class Boxer:
             self.stamina -= random.randint(4,8)
             other.cleankopunches +=1
             self.knocked(other)
-
 
         else:
             self.vitality-= other.punch() - (self.toughness // 4)
@@ -137,9 +131,6 @@ class Boxer:
             self.moveaway(other)
 
     def combo(self, other):
-
-
-
         if self.stamina >= 40:
             print(f"Looks like a combination from {self.name}!")
             print("1!\n")
@@ -160,17 +151,13 @@ class Boxer:
                     if other.is_knocked == True:
                         return
 
-
-
-
     def moveto(self, other):
-
         if  not self.isclose:
-
             print(f"{self.name} closes distance!")
             self.isclose = True
             other.isclose = True
             self.stamina -= 2
+            
     def moveaway(self, other):
         print(f"{self.name} moves away!")
         self.isclose = False
@@ -187,18 +174,16 @@ class Boxer:
                         self.moveaway(other)
                         return "moveaway"
 
-
                 c = random.randint(1,4)
                 if c == 1 and not self.in_combo:
-
                     self.in_combo = True
                     self.combo(other)
                     self.in_combo = False
                     return "combo"
+
                 else:
                     d = random.randint(1, 6)
                     if d == 1 and self.stamina > 20:
-
                         self.kopunch()
                         print(f"un golpe poderoso de parte de {self.name}\n")
                     else:
@@ -214,23 +199,29 @@ class Boxer:
                                 if random.random() < 0.5:
                                     other.counter(self)
                                     return "counter"
+                                
                         else:
                             if random.choice([True, False]):
                                 other.block(self)
                                 return "block"
+                            
                             else:
                                 other.takepunch(self)
                                 return ("takepunch")
+                            
                     if r == 2:
                         other.block(self)
                         return "block"
+                    
                     if r == 3:
                         other.takepunch(self)
                         return ("takepunch")
+                    
             else:
                 self.moveto(other)
                 if random.choice([True, False]):
                     self.exchange(other)
+                    
         else:
             self.breath()
             return ("breath")
