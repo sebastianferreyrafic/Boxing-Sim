@@ -45,39 +45,29 @@ class Fight:
         else:
             print("Empate!\n")
 
-    def estadisticas (self, other):
-            print(f"las estadisticas de {self.name} son:\n")
-            print (f"puñetazos recibidos por {self.name} {self.punchestaken}")
-            print (f"puñetazos lanzados por {self.name} {self.punchesthrown}")
-            print(f"golpes fuertes lanzados por {self.name} {self.kopunchesthrown}")
-            print(f"puñetazos acertados por {self.name} {self.cleanpunches}")
-            print(f"puñetazos fuertes acertados por {self.name} {self.cleankopunches}")
-            print (f"puñetazos bloqueados por {self.name} {self.punchesblocked}")
-            print (f"puñetazos esquivados por {self.name} {self.punchesavoided}")
-            print (f"contragolpes por {self.name} {self.punchescountered}")
-            print (f"combinaciones por {self.name} {self.numbercombos}")
-            print(f"las estadisticas de {other.name} son:\n")
-            print (f"puñetazos recibidos por {other.name} {other.punchestaken}")
-            print (f"puñetazos lanzados por {other.name} {other.punchesthrown}")
-            print(f"golpes fuertes lanzados por {other.name} {other.kopunchesthrown}")
-            print(f"puñetazos acertados por {other.name} {other.cleanpunches}")
-            print(f"puñetazos fuertes acertados por {other.name} {other.cleankopunches}")
-            print (f"puñetazos bloqueados por {other.name} {other.punchesblocked}")
-            print (f"puñetazos esquivados por {other.name} {other.punchesavoided}")
-            print (f"contragolpes por {other.name} {other.punchescountered}")
-            print (f"combinaciones por {other.name} {other.numbercombos}")
+    def estadisticas (self, boxer):
+
+        print(f"las estadisticas de {boxer.name} son:\n")
+        print (f"puñetazos recibidos por {boxer.name} {boxer.punchestaken}")
+        print (f"puñetazos lanzados por {boxer.name} {boxer.punchesthrown}")
+        print(f"golpes fuertes lanzados por {boxer.name} {boxer.kopunchesthrown}")
+        print(f"puñetazos acertados por {boxer.name} {boxer.cleanpunches}")
+        print(f"puñetazos fuertes acertados por {boxer.name} {boxer.cleankopunches}")
+        print (f"puñetazos bloqueados por {boxer.name} {boxer.punchesblocked}")
+        print (f"puñetazos esquivados por {boxer.name} {boxer.punchesavoided}")
+        print (f"contragolpes por {boxer.name} {boxer.punchescountered}")
+        print (f"combinaciones por {boxer.name} {boxer.numbercombos}")
 
 
 
 
 
 
-def main():
+"""def main():
     boxer1 = Boxer("Seba", 20, 200, 19, 19, 3)
     boxer2 = Boxer("El Diablo", 20, 200, 19, 19, 3)
     fight1 = Fight(boxer1, boxer2)
-    #fight1()
-    fight1.estadisticas()
+    fight1.estadisticas(boxer1)
+    fight1.estadisticas(boxer2)
 
-
-main()
+main()"""
