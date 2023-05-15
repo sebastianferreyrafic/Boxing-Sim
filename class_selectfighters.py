@@ -1,5 +1,6 @@
 from class_boxer import *
 from class_fight import *
+from guardarboxeadordb import *
 class SelectFighters:
     #def __init__(self):
     def select():
@@ -91,12 +92,14 @@ class SelectFighters:
 
 
 
-
 def main():
 
     boxer1, boxer2 = SelectFighters.select()
-    fight1 = Fight(boxer1, boxer2)
-    fight1.estadisticas(boxer1)
-    fight1.estadisticas(boxer2)
+    guardar_boxeador(boxer1)
+    guardar_boxeador(boxer2)
+
+    Fight(boxer1, boxer2).fight()
+
+
 
 main()
