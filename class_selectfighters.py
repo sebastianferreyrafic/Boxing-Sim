@@ -5,8 +5,7 @@ class SelectFighters:
     #def __init__(self):
     def select():
 
-        print("To select a fighter enter 1\n to create a fighter enter 2\n")
-        option = str(input())
+        option = str(input("To select a fighter enter 1\n to create a fighter enter 2\n")) 
 
         if option == "1":
             print("select your fighter!")
